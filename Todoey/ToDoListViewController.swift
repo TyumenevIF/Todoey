@@ -14,12 +14,24 @@ class ToDoListViewController: UIViewController {
     let itemArray = ["Find Mike", "Buy Eggos", "Destroy Demogogon"]
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+
         table.dataSource = self
         table.delegate = self
+        setNavigationBarColor(textColor: .white, backgroundColor: .systemBlue)
+    }
+    
+    func setNavigationBarColor(textColor: UIColor, backgroundColor: UIColor) {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.titleTextAttributes = [.foregroundColor: textColor]
+        appearance.backgroundColor = backgroundColor
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
     }
 }
 
+// MARK: - UITableViewDataSource
 extension ToDoListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -33,7 +45,18 @@ extension ToDoListViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension ToDoListViewController: UITableViewDelegate {
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        } else {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
