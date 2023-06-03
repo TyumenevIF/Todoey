@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		432DE7BA2A2BA6D0008FAA14 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432DE7B92A2BA6D0008FAA14 /* Item.swift */; };
 		43DAF5592A266A7F00BCA6D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DAF5582A266A7F00BCA6D4 /* AppDelegate.swift */; };
 		43DAF55B2A266A7F00BCA6D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DAF55A2A266A7F00BCA6D4 /* SceneDelegate.swift */; };
 		43DAF55D2A266A7F00BCA6D4 /* ToDoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DAF55C2A266A7F00BCA6D4 /* ToDoListViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		432DE7B92A2BA6D0008FAA14 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		43DAF5552A266A7F00BCA6D4 /* Todoey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Todoey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43DAF5582A266A7F00BCA6D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43DAF55A2A266A7F00BCA6D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +39,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		432DE7B52A2BA658008FAA14 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				432DE7B92A2BA6D0008FAA14 /* Item.swift */,
+			);
+			path = "Data Model";
+			sourceTree = "<group>";
+		};
+		432DE7B62A2BA666008FAA14 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				43DAF55C2A266A7F00BCA6D4 /* ToDoListViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		432DE7B72A2BA673008FAA14 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				43DAF5582A266A7F00BCA6D4 /* AppDelegate.swift */,
+				43DAF55A2A266A7F00BCA6D4 /* SceneDelegate.swift */,
+				43DAF5612A266A8100BCA6D4 /* Assets.xcassets */,
+				43DAF5632A266A8100BCA6D4 /* LaunchScreen.storyboard */,
+				43DAF5662A266A8100BCA6D4 /* Info.plist */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		432DE7B82A2BA680008FAA14 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				43DAF55E2A266A7F00BCA6D4 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		43DAF54C2A266A7F00BCA6D4 = {
 			isa = PBXGroup;
 			children = (
@@ -56,13 +94,10 @@
 		43DAF5572A266A7F00BCA6D4 /* Todoey */ = {
 			isa = PBXGroup;
 			children = (
-				43DAF5582A266A7F00BCA6D4 /* AppDelegate.swift */,
-				43DAF55A2A266A7F00BCA6D4 /* SceneDelegate.swift */,
-				43DAF55C2A266A7F00BCA6D4 /* ToDoListViewController.swift */,
-				43DAF55E2A266A7F00BCA6D4 /* Main.storyboard */,
-				43DAF5612A266A8100BCA6D4 /* Assets.xcassets */,
-				43DAF5632A266A8100BCA6D4 /* LaunchScreen.storyboard */,
-				43DAF5662A266A8100BCA6D4 /* Info.plist */,
+				432DE7B52A2BA658008FAA14 /* Data Model */,
+				432DE7B82A2BA680008FAA14 /* Views */,
+				432DE7B62A2BA666008FAA14 /* Controllers */,
+				432DE7B72A2BA673008FAA14 /* Supporting files */,
 			);
 			path = Todoey;
 			sourceTree = "<group>";
@@ -138,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				432DE7BA2A2BA6D0008FAA14 /* Item.swift in Sources */,
 				43DAF55D2A266A7F00BCA6D4 /* ToDoListViewController.swift in Sources */,
 				43DAF5592A266A7F00BCA6D4 /* AppDelegate.swift in Sources */,
 				43DAF55B2A266A7F00BCA6D4 /* SceneDelegate.swift in Sources */,
@@ -289,7 +325,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8545KP6MGS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Todoey/Info.plist;
+				INFOPLIST_FILE = "Todoey/Supporting files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -320,7 +356,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8545KP6MGS;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Todoey/Info.plist;
+				INFOPLIST_FILE = "Todoey/Supporting files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
