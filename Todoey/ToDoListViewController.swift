@@ -12,14 +12,18 @@ class ToDoListViewController: UIViewController {
     @IBOutlet weak var table: UITableView!
     
     var itemArray = ["Find Mike", "Buy Eggos", "Destroy Demogogon"]
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         table.dataSource = self
         table.delegate = self
-        table.translatesAutoresizingMaskIntoConstraints = false
         setNavigationBarColor(textColor: .white, backgroundColor: .systemBlue)
+        
+        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
+            itemArray = items
+        }
     }
     
     func setNavigationBarColor(textColor: UIColor, backgroundColor: UIColor) {
@@ -39,7 +43,8 @@ class ToDoListViewController: UIViewController {
         let alert = UIAlertController(title: "Add New Todoey Item", message: "", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
-            self.itemArray.append(textField.text!)
+            self.itemArray.append(textField.text!)            
+            self.defaults.set(self.itemArray, forKey: "TodoListArray")
             self.table.reloadData()
         }
         
