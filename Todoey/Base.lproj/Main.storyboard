@@ -50,7 +50,14 @@
                             <constraint firstAttribute="bottom" secondItem="ew3-eT-VXy" secondAttribute="bottom" id="tr2-PL-L8o"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Todoey" id="zvD-Q3-XlC"/>
+                    <navigationItem key="navigationItem" title="Todoey" id="zvD-Q3-XlC">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="1XR-JW-p6a">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="addButtonPressed:" destination="BYZ-38-t0r" id="DcM-38-pQW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="table" destination="ew3-eT-VXy" id="5X0-W9-Eaj"/>
                     </connections>

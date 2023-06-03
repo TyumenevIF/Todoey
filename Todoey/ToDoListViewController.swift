@@ -11,13 +11,14 @@ class ToDoListViewController: UIViewController {
     
     @IBOutlet weak var table: UITableView!
     
-    let itemArray = ["Find Mike", "Buy Eggos", "Destroy Demogogon"]
+    var itemArray = ["Find Mike", "Buy Eggos", "Destroy Demogogon"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         table.dataSource = self
         table.delegate = self
+        table.translatesAutoresizingMaskIntoConstraints = false
         setNavigationBarColor(textColor: .white, backgroundColor: .systemBlue)
     }
     
@@ -28,6 +29,27 @@ class ToDoListViewController: UIViewController {
         appearance.backgroundColor = backgroundColor
         navigationItem.standardAppearance = appearance
         navigationItem.scrollEdgeAppearance = appearance
+    }
+    
+    // MARK: - Add New Items
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add New Todoey Item", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            self.itemArray.append(textField.text!)
+            self.table.reloadData()
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Create new item"
+            textField = alertTextField
+        }
+        
+        alert.addAction(action)
+        present(alert, animated: true)
     }
 }
 
