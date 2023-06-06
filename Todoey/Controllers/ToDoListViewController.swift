@@ -23,21 +23,7 @@ class ToDoListViewController: UIViewController {
         setNavigationBarColor(textColor: .white, backgroundColor: .systemBlue)
         print(dataFilePath)
         
-        let newItem = Item()
-        newItem.title = "Find Mike"
-        itemArray.append(newItem)
-        
-        let newItem2 = Item()
-        newItem2.title = "Buy eat"
-        itemArray.append(newItem2)
-        
-        let newItem3 = Item()
-        newItem3.title = "Do something"
-        itemArray.append(newItem3)
-        
-//        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
-//            itemArray = items
-//        }
+        loadItems()
     }
     
     func setNavigationBarColor(textColor: UIColor, backgroundColor: UIColor) {
@@ -74,8 +60,8 @@ class ToDoListViewController: UIViewController {
     
     // MARK: - Model Manupulation Methods
     func saveItems() {
-        
         let encoder = PropertyListEncoder()
+        
         do {
             let data = try encoder.encode(itemArray)
             try data.write(to: self.dataFilePath!)
@@ -84,6 +70,18 @@ class ToDoListViewController: UIViewController {
         }
         
         self.table.reloadData()
+    }
+    
+    func loadItems() {
+        if let data = try? Data(contentsOf: dataFilePath!) {
+            let decoder = PropertyListDecoder()
+            
+            do {
+                itemArray = try! decoder.decode([Item].self, from: data)
+            } catch {
+                print("Error decoding item array, \(error)")
+            }
+        }
     }
 }
 
