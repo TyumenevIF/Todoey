@@ -70,7 +70,7 @@ class ToDoListViewController: UIViewController {
             print("Error saving context \(error)")
         }
         
-        self.table.reloadData()
+        table.reloadData()
     }
     
     func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
@@ -80,6 +80,8 @@ class ToDoListViewController: UIViewController {
         } catch {
             print("Error fetching data from context \(error)")
         }
+        
+        table.reloadData()
     }
 }
 
@@ -120,6 +122,16 @@ extension ToDoListViewController: UISearchBarDelegate {
         request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
         request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         loadItems(with: request)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadItems()
+            
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
     }
 }
 
