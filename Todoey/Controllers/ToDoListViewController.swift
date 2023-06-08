@@ -13,8 +13,7 @@ class ToDoListViewController: UIViewController {
     @IBOutlet weak var table: UITableView!
     
     var itemArray = [Item]()
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?
-        .appendingPathComponent("Items.plist")
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -26,7 +25,7 @@ class ToDoListViewController: UIViewController {
         setNavigationBarColor(textColor: .white, backgroundColor: .systemBlue)
         print(dataFilePath)
         
-//        loadItems()
+        loadItems()
     }
     
     func setNavigationBarColor(textColor: UIColor, backgroundColor: UIColor) {
@@ -64,7 +63,6 @@ class ToDoListViewController: UIViewController {
     
     // MARK: - Model Manupulation Methods
     func saveItems() {
-        let encoder = PropertyListEncoder()
         
         do {
             try context.save()
@@ -75,16 +73,14 @@ class ToDoListViewController: UIViewController {
         self.table.reloadData()
     }
     
-//    func loadItems() {
-//        let decoder = PropertyListDecoder()
-//
-//        do {
-//            let data = try Data(contentsOf: dataFilePath!)
-//            itemArray = try! decoder.decode([Item].self, from: data)
-//        } catch {
-//            print("Error decoding item array, \(error)")
-//        }
-//    }
+    func loadItems() {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        do {
+            itemArray = try context.fetch(request)
+        } catch {
+            print("Error fetching data from context \(error)")
+        }
+    }
 }
 
 // MARK: - UITableViewDataSource
