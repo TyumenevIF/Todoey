@@ -8,12 +8,9 @@
 import UIKit
 import RealmSwift
 
-class ToDoListViewController: UIViewController {
-    
-    @IBOutlet weak var table: UITableView!
+class ToDoListViewController: SwipeTableViewController {
     
     let realm = try! Realm()
-    
     var toDoItems: Results<Item>?
     
     var selectedCategory: Category? {
@@ -23,11 +20,9 @@ class ToDoListViewController: UIViewController {
     }
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        table.dataSource = self
-        table.delegate = self
         setNavigationBarColor(textColor: .white, backgroundColor: .systemBlue)
         print(dataFilePath)
     }
@@ -62,7 +57,7 @@ class ToDoListViewController: UIViewController {
                 }
             }
             
-            self.table.reloadData()
+            self.tableView.reloadData()
         }
         
         alert.addTextField { (alertTextField) in
@@ -78,20 +73,30 @@ class ToDoListViewController: UIViewController {
     func loadItems() {
         
         toDoItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
-        table.reloadData()
+        tableView.reloadData()
     }
-}
-
-// MARK: - UITableViewDataSource
-extension ToDoListViewController: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func updateModel(at indexPath: IndexPath) {
+        if let item = toDoItems?[indexPath.row] {
+            do {
+                try realm.write {
+                    realm.delete(item)
+                }
+            } catch {
+                print("Error deleting Item, \(error)")
+            }
+        }
+    }
+    
+    // MARK: - UITableViewDataSource
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDoItems?.count ?? 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if let item = toDoItems?[indexPath.row] {
             cell.textLabel?.text = item.title
@@ -102,12 +107,9 @@ extension ToDoListViewController: UITableViewDataSource {
         
         return cell
     }
-}
-
-// MARK: - UITableViewDelegate
-extension ToDoListViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    // MARK: - UITableViewDelegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if let item = toDoItems?[indexPath.row] {
             do {
@@ -119,14 +121,11 @@ extension ToDoListViewController: UITableViewDelegate {
             }
         }
         
-        table.reloadData()
-        table.deselectRow(at: indexPath, animated: true)
+        tableView.reloadData()
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-}
-
-// MARK: - UISearchBarDelegate
-extension ToDoListViewController: UISearchBarDelegate {
     
+    // MARK: - UISearchBarDelegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         toDoItems = toDoItems?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "dateCreated", ascending: true)
