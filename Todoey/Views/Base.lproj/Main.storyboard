@@ -58,17 +58,16 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="table" destination="ew3-eT-VXy" id="5X0-W9-Eaj"/>
+                        <outlet property="table" destination="ew3-eT-VXy" id="ZLU-3e-Pdz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1371" y="-28"/>
         </scene>
-        <!--Category View Controller-->
+        <!--Todoey-->
         <scene sceneID="X7b-Ij-3oc">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OoR-xv-wom" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="Q7t-B9-SLy" customClass="CategoryViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xqv-AF-gRa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -85,9 +84,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" identifier="goToItems" id="sby-r5-Lir"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -101,7 +97,7 @@
                             <constraint firstAttribute="bottom" secondItem="K6F-O4-3Ne" secondAttribute="bottom" id="l3f-Go-bGR"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="sdd-dS-fgr">
+                    <navigationItem key="navigationItem" title="Todoey" id="sdd-dS-fgr">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="qpx-5q-Trt">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -111,10 +107,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="table" destination="K6F-O4-3Ne" id="rmq-LI-cRs"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="goToItems" id="dmt-5M-Nw3"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OoR-xv-wom" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="607" y="-28"/>
+            <point key="canvasLocation" x="604" y="-28"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SmD-Hz-ga1">
@@ -131,7 +129,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Q7t-B9-SLy" kind="relationship" relationship="rootViewController" id="ZW0-Jn-el8"/>
+                        <segue destination="Q7t-B9-SLy" kind="relationship" relationship="rootViewController" id="YOL-6U-pws"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1X-cK-fIj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
